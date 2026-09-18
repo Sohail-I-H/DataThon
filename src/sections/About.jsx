@@ -1,8 +1,5 @@
-import { SectionHeading } from "../components/UI";
-import { DAYS } from "../data/content";
-
 export function About() {
-  const pipeline = ["Raw Data", "Deep Insights", "ML Predictions", "Real Impact"];
+  const pipeline = ["Raw Data", "Deep Insights", "Model Building", "Real Impact"];
 
   return (
     <section id="about" className="relative z-10 py-24 px-6" aria-labelledby="about-heading">
@@ -102,65 +99,6 @@ export function About() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function EventStructure() {
-  return (
-    <section id="event-structure" className="relative z-10 py-24 px-6 bg-surface-soft/60 border-y border-border-subtle" aria-labelledby="structure-heading">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14 reveal">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coffee-100 border border-coffee-200 text-coffee-800 text-xs font-display font-semibold uppercase tracking-wider mb-3">
-            <span>Event Structure</span>
-          </div>
-          <h2 id="structure-heading" className="section-heading">
-            Two Days. <span className="font-serif italic text-caramel">Complete Transformation.</span>
-          </h2>
-          <p className="text-text-secondary text-base sm:text-lg mt-3 max-w-xl mx-auto">
-            From learning fundamental data science tools to applying them on an original challenge.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {DAYS.map((day, i) => (
-            <article
-              key={day.day}
-              className={`reveal ${i === 1 ? "reveal-delay-2" : ""} card-warm p-8 sm:p-10 flex flex-col justify-between`}
-            >
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-4">
-                  <span className="badge-warm font-display font-bold text-xs uppercase tracking-wider">
-                    {day.day}
-                  </span>
-                  <span className="text-text-muted text-xs sm:text-sm font-medium">
-                    📅 {day.date}
-                  </span>
-                </div>
-
-                <h3 className="font-serif font-bold text-coffee-950 text-2xl sm:text-3xl mb-1">
-                  {day.title}
-                </h3>
-                <p className="font-serif italic text-caramel text-base sm:text-lg mb-5">
-                  {day.subtitle}
-                </p>
-                <p className="text-text-secondary text-sm sm:text-base leading-relaxed mb-6">
-                  {day.desc}
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-border-subtle flex items-center justify-between">
-                <span className="text-xs font-display font-semibold text-coffee-800">
-                  Focus: {i === 0 ? "Foundations & Code Labs" : "Applied Challenge & Defense"}
-                </span>
-                <span className="text-xs font-display font-bold text-caramel">
-                  {day.badge}
-                </span>
-              </div>
-            </article>
-          ))}
         </div>
       </div>
     </section>

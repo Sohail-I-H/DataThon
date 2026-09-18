@@ -1,8 +1,7 @@
 import NavBar from "./components/NavBar";
 import Hero from "./sections/Hero";
-import { About, EventStructure } from "./sections/About";
-import { Workshop, EDASpotlight, MLFundamentals } from "./sections/Workshop";
-import { Hackathon, ProblemDomains, Evaluation, AIPolicy } from "./sections/Hackathon";
+import { About } from "./sections/About";
+import { Hackathon, ProblemDomains } from "./sections/Hackathon";
 import { Eligibility, Register, Contact, Footer } from "./sections/Register";
 import { useScrollReveal } from "./hooks/useAnimations";
 
@@ -23,14 +22,8 @@ export default function App() {
       <main>
         <Hero />
         <About />
-        <EventStructure />
-        <Workshop />
-        <EDASpotlight />
-        <MLFundamentals />
         <Hackathon />
         <ProblemDomains />
-        <Evaluation />
-        <AIPolicy />
         <Eligibility />
         <Register />
         <Contact />

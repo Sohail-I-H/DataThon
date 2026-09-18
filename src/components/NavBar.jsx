@@ -8,10 +8,8 @@ export default function NavBar() {
   const links = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
-    { id: "workshop", label: "Workshop" },
     { id: "hackathon", label: "Hackathon" },
     { id: "problems", label: "Problems" },
-    { id: "evaluation", label: "Evaluation" },
     { id: "eligibility", label: "Eligibility" },
     { id: "register", label: "Register", cta: true },
     { id: "contact", label: "Contact" },

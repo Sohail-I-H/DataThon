@@ -87,39 +87,6 @@ export function Eligibility() {
           </div>
         </div>
 
-        {/* Explicit Ineligibility Breakdown */}
-        <div className="reveal card-soft p-6 sm:p-7 mb-14 border border-border-medium">
-          <div className="flex items-start gap-3.5">
-            <span className="text-2xl mt-0.5">⚠️</span>
-            <div>
-              <h4 className="font-serif font-bold text-coffee-950 text-base sm:text-lg mb-1">
-                Clarification on Ineligible Registrations
-              </h4>
-              <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-3">
-                To keep team verification quick and transparent, registrations will NOT be accepted from:
-              </p>
-              <ul className="grid sm:grid-cols-2 gap-2 text-xs sm:text-sm text-text-secondary">
-                <li className="flex items-center gap-2">
-                  <span className="text-rust font-bold">✗</span>
-                  <span>1st &amp; 2nd Year students from IT branches</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-rust font-bold">✗</span>
-                  <span>4th / Final Year students from IT branches</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-rust font-bold">✗</span>
-                  <span>Teams with fewer or more than 3 students</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-rust font-bold">✗</span>
-                  <span>Cross-college external candidates</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
         {/* Team Rules */}
         <h3 className="reveal text-center font-serif font-bold text-coffee-950 text-2xl mb-8">
           Team Requirements &amp; Selection

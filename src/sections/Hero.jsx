@@ -48,7 +48,7 @@ export default function Hero() {
 
           {/* CTAs */}
           {/* CTA */}
-          <div className="flex justify-center items-center mb-12">
+          <div className="flex justify-center items-center">
             <a
               href={GOOGLE_FORM_LINK}
               target="_blank"
@@ -59,15 +59,6 @@ export default function Hero() {
               <span>Register Team</span>
               <span className="text-caramel-light font-normal text-sm">· 15 Slots Only</span>
             </a>
-          </div>
-
-          {/* Eligibility highlight note */}
-          <div className="max-w-2xl mx-auto p-4 rounded-2xl bg-surface border border-border-subtle shadow-soft text-left flex items-start gap-3.5">
-            <span className="text-xl mt-0.5">ℹ️</span>
-            <div className="text-xs sm:text-sm text-text-secondary">
-              <strong className="text-coffee-950 font-semibold">Eligibility Notice: </strong>
-              Open to <span className="text-coffee-900 font-semibold">All Years of Non-IT Branches</span> (1st–4th year) and strictly <span className="text-coffee-900 font-semibold">3rd-Year Students only</span> from IT branches.
-            </div>
           </div>
         </div>
       </section>

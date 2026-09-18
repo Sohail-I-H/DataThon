@@ -1,274 +1,213 @@
-import {
-  WORKSHOP_TOPICS,
-  DS_PIPELINE,
-  EDA_CARDS,
-  ML_TYPES,
-  ML_TOOLBOX,
-  REGRESSION_METRICS,
-  CLASSIFICATION_METRICS,
-} from "../data/content";
-import { NumberedCard, ChipList, BulletList, PipelineFlow } from "../components/UI";
+import { useState } from "react";
 
-function VizTable({ rows }) {
-  return (
-    <div className="overflow-hidden rounded-xl border border-border-subtle mt-4 bg-surface-soft/60">
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-coffee-100/70 border-b border-border-subtle">
-            <th className="text-left py-2.5 px-3.5 text-coffee-900 text-xs font-display font-bold tracking-wider uppercase">
-              Analytical Question
-            </th>
-            <th className="text-left py-2.5 px-3.5 text-coffee-900 text-xs font-display font-bold tracking-wider uppercase">
-              Recommended Visualization
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.q} className="border-b border-border-subtle last:border-0 hover:bg-surface transition-colors">
-              <td className="py-2.5 px-3.5 text-text-secondary text-xs sm:text-sm font-medium">{r.q}</td>
-              <td className="py-2.5 px-3.5 text-coffee-950 text-xs sm:text-sm font-semibold">{r.v}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
+const FLOW_STAGES = [
+  {
+    num: "01",
+    phase: "Foundation & Ingestion",
+    title: "Problem & Data Ingestion",
+    icon: "🎯",
+    accent: "coffee",
+    desc: "Formulate analytical hypotheses, establish the Python data science environment, and ingest raw tabular records.",
+    points: [
+      "Translating business problems into quantitative data tasks",
+      "Setting up libraries: NumPy, Pandas, Matplotlib & Seaborn",
+      "Reading CSV files & examining Series / DataFrame anatomy",
+    ],
+    tech: ["Python", "Pandas", "read_csv()", "DataFrame"],
+  },
+  {
+    num: "02",
+    phase: "Data Hygiene",
+    title: "Data Cleaning & Preprocessing",
+    icon: "🧹",
+    accent: "amber",
+    desc: "Diagnose imperfections in raw data before modeling, ensuring consistency, structure, and type safety.",
+    points: [
+      "Handling missing values: dropna(), fillna() & imputation",
+      "Duplicate records removal & datatype casting",
+      "Vectorized mathematical array operations with NumPy",
+    ],
+    tech: ["NumPy", "dropna()", "fillna()", "Vector Ops"],
+  },
+  {
+    num: "03",
+    phase: "Deep Exploration",
+    title: "Exploratory Data Analysis (EDA)",
+    icon: "🔍",
+    accent: "sage",
+    desc: "Interrogate data beyond basic charts — understand distributions, test hypotheses, and uncover correlations.",
+    points: [
+      "Analyzing numerical vs. categorical feature distributions",
+      "Correlation matrices & feature relationship mapping",
+      "Targeted visual storytelling (Histograms, Scatter, Box plots)",
+    ],
+    tech: ["Histograms", "Heatmaps", "Scatter Plots", "Correlation"],
+  },
+  {
+    num: "04",
+    phase: "Signal Preparation",
+    title: "Feature Engineering & Split",
+    icon: "⚙️",
+    accent: "caramel",
+    desc: "Transform raw variables into high-signal model inputs and establish unbiased validation splits.",
+    points: [
+      "Categorical encoding: One-Hot & Label Encoding",
+      "Numerical normalization & feature scaling (StandardScaler)",
+      "Strict train/test splitting (80/20) to prevent data leakage",
+    ],
+    tech: ["LabelEncoder", "StandardScaler", "train_test_split"],
+  },
+  {
+    num: "05",
+    phase: "Applied Modeling",
+    title: "Machine Learning Toolkit",
+    icon: "🤖",
+    accent: "coffee",
+    desc: "Select, train, and benchmark machine learning algorithms tailored to continuous or categorical targets.",
+    points: [
+      "Regression: Linear Regression, Decision Trees, Random Forest",
+      "Classification: Logistic Regression, Random Forest, KNN",
+      "Unsupervised clustering essentials with K-Means",
+    ],
+    tech: ["Linear/Logistic", "Decision Trees", "Random Forest", "K-Means"],
+  },
+  {
+    num: "06",
+    phase: "Validation & Impact",
+    title: "Evaluation & Prediction",
+    icon: "📈",
+    accent: "amber",
+    desc: "Rigorously validate model accuracy, justify evaluation metrics, and generate real-world actionable predictions.",
+    points: [
+      "Regression metrics: MAE, MSE, RMSE, R² Score",
+      "Classification metrics: Accuracy, Precision, Recall, F1-Score",
+      "Model interpretability, edge cases, and business impact",
+    ],
+    tech: ["RMSE & R²", "F1-Score", "Confusion Matrix", "Inference"],
+  },
+];
 
 export function Workshop() {
+  const [activeStage, setActiveStage] = useState(null);
+
   return (
-    <section id="workshop" className="relative z-10 py-24 px-6" aria-labelledby="workshop-heading">
+    <section id="workshop" className="relative z-10 py-16 px-6" aria-label="Day 1 Workshop Flow">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14 reveal">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coffee-100 border border-coffee-200 text-coffee-800 text-xs font-display font-semibold uppercase tracking-wider mb-3">
-            <span>Day 1 — Comprehensive Workshop</span>
-          </div>
-          <h2 id="workshop-heading" className="section-heading">
-            From Problem to <span className="font-serif italic text-caramel">Prediction</span>
-          </h2>
-          <p className="text-text-secondary text-base sm:text-lg mt-3 max-w-2xl mx-auto">
-            A cohesive practical masterclass structured as an unbroken workflow — not disconnected lecture slides.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {WORKSHOP_TOPICS.map((topic, i) => {
-            const delay = ["", "reveal-delay-1", "reveal-delay-2", "", "reveal-delay-1", "reveal-delay-2"][i];
-            const isWide = topic.isPipeline;
-
-            return (
-              <div key={topic.num} className={`reveal ${delay} ${isWide ? "lg:col-span-2" : ""}`}>
-                <NumberedCard num={topic.num} title={topic.title} className="h-full">
-                  {topic.items && <BulletList items={topic.items} color="coffee" />}
-                  {topic.tags && <ChipList items={topic.tags} variant="warm" />}
-
-                  {topic.isPipeline && (
-                    <>
-                      <p className="text-text-secondary text-xs sm:text-sm mb-4 leading-relaxed">
-                        {topic.desc}
-                      </p>
-                      <div className="bg-surface-soft/80 border border-border-subtle rounded-2xl p-5">
-                        <PipelineFlow steps={DS_PIPELINE} />
-                      </div>
-                    </>
+        {/* Pipeline Stepper / Flow Bar */}
+        <div className="reveal mb-10 overflow-x-auto pb-3">
+          <div className="flex items-center justify-between min-w-[720px] bg-surface rounded-2xl border border-border-subtle p-3 shadow-soft">
+            {FLOW_STAGES.map((s, idx) => {
+              const isSelected = activeStage === idx;
+              return (
+                <div key={s.num} className="flex items-center flex-1 last:flex-none">
+                  <button
+                    onClick={() => setActiveStage(isSelected ? null : idx)}
+                    className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all w-full text-xs font-display font-semibold ${
+                      isSelected
+                        ? "bg-coffee-900 text-[#FDFBF7] shadow-sm"
+                        : "text-coffee-800 hover:bg-surface-soft"
+                    }`}
+                    aria-label={`Highlight Stage ${s.num}: ${s.title}`}
+                  >
+                    <span
+                      className={`w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-bold ${
+                        isSelected ? "bg-caramel text-white" : "bg-coffee-100 text-coffee-900"
+                      }`}
+                    >
+                      {s.num}
+                    </span>
+                    <span className="truncate max-w-[100px] sm:max-w-[120px]">{s.title.split(" ")[0]}</span>
+                  </button>
+                  {idx < FLOW_STAGES.length - 1 && (
+                    <span className="text-caramel font-bold px-2 text-xs opacity-60">→</span>
                   )}
-
-                  {topic.isVizTable && (
-                    <>
-                      <VizTable rows={topic.vizRows} />
-                      <div className="mt-4 p-3 rounded-xl bg-amber-soft border border-amber-warm/30 text-xs text-coffee-900 font-medium">
-                        "{topic.callout}"
-                      </div>
-                    </>
-                  )}
-                </NumberedCard>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function EDASpotlight() {
-  return (
-    <section id="eda" className="relative z-10 py-24 px-6 bg-surface-soft/60 border-y border-border-subtle" aria-labelledby="eda-heading">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14 reveal">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coffee-100 border border-coffee-200 text-coffee-800 text-xs font-display font-semibold uppercase tracking-wider mb-3">
-            <span>Special Module</span>
+                </div>
+              );
+            })}
           </div>
-          <h2 id="eda-heading" className="section-heading">
-            Exploratory Data Analysis: <span className="font-serif italic text-caramel">Beyond Just Graphing</span>
-          </h2>
-          <p className="text-text-secondary text-base sm:text-lg mt-3 max-w-2xl mx-auto">
-            Participants are coached to interrogate raw data methodically — formulating hypotheses and drawing clear statistical inferences.
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {EDA_CARDS.map((card, i) => {
-            const delay = ["", "reveal-delay-1", "reveal-delay-2"][i];
-            const badgeClasses = {
-              coffee: "bg-coffee-100 text-coffee-900 border-coffee-200",
-              amber: "bg-amber-soft text-amber-warm border-amber-warm/40",
-              sage: "bg-sage-soft text-sage border-sage/40",
-            };
+        {/* Connected Flow Diagram Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          {FLOW_STAGES.map((stage, i) => {
+            const isSelected = activeStage === i;
+            const isDimmed = activeStage !== null && activeStage !== i;
 
             return (
               <div
-                key={card.title}
-                className={`reveal ${delay} card-warm p-8 flex flex-col justify-between`}
+                key={stage.num}
+                onClick={() => setActiveStage(isSelected ? null : i)}
+                className={`reveal card-warm p-6 sm:p-7 flex flex-col justify-between cursor-pointer transition-all duration-300 relative ${
+                  isSelected
+                    ? "ring-2 ring-caramel bg-amber-soft/30 -translate-y-1 shadow-card-hover"
+                    : isDimmed
+                    ? "opacity-60 hover:opacity-100"
+                    : ""
+                }`}
               >
+                {/* Stage Header */}
                 <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="text-3xl p-3 rounded-2xl bg-surface-soft border border-border-subtle" role="img" aria-label={card.title}>
-                      {card.icon}
-                    </span>
-                    <span className={`text-[11px] font-display font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${badgeClasses[card.color]}`}>
-                      Pillar 0{i + 1}
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-lg bg-surface-soft border border-border-subtle flex items-center justify-center text-base">
+                        {stage.icon}
+                      </span>
+                      <span className="font-display font-bold text-xs tracking-wider text-caramel uppercase">
+                        Stage {stage.num}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-display font-semibold px-2.5 py-0.5 rounded-full bg-coffee-100 border border-coffee-200 text-coffee-800">
+                      {stage.phase}
                     </span>
                   </div>
-                  <h3 className="font-serif font-bold text-coffee-950 text-xl mb-4">
-                    {card.title}
+
+                  <h3 className="font-serif font-bold text-coffee-950 text-lg sm:text-xl mb-2 leading-snug">
+                    {stage.title}
                   </h3>
-                  <ul className="space-y-3">
-                    {card.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-text-secondary text-xs sm:text-sm leading-relaxed">
+                  <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-4">
+                    {stage.desc}
+                  </p>
+
+                  {/* Bullet Points */}
+                  <ul className="space-y-2 mb-5">
+                    {stage.points.map((pt) => (
+                      <li key={pt} className="flex items-start gap-2 text-xs sm:text-sm text-text-secondary leading-normal">
                         <span className="text-caramel font-bold mt-0.5">›</span>
-                        <span>{item}</span>
+                        <span>{pt}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
 
-export function MLFundamentals() {
-  return (
-    <section id="ml" className="relative z-10 py-24 px-6" aria-labelledby="ml-heading">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14 reveal">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-coffee-100 border border-coffee-200 text-coffee-800 text-xs font-display font-semibold uppercase tracking-wider mb-3">
-            <span>Machine Learning</span>
-          </div>
-          <h2 id="ml-heading" className="section-heading">
-            Applied Machine Learning <span className="font-serif italic text-caramel">Toolkit</span>
-          </h2>
-          <p className="text-text-secondary text-base sm:text-lg mt-3 max-w-xl mx-auto">
-            A targeted curriculum focused on algorithms, validation metrics, and practical interpretability.
-          </p>
-        </div>
-
-        {/* 3 Core ML Paradigms */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {ML_TYPES.map((t, i) => {
-            const delay = ["", "reveal-delay-1", "reveal-delay-2"][i];
-            return (
-              <div key={t.title} className={`reveal ${delay} card-warm p-8 flex flex-col justify-between`}>
-                <div>
-                  <span className="eyebrow text-xs mb-2 block">{t.type}</span>
-                  <h3 className="font-serif font-bold text-coffee-950 text-2xl mb-3">{t.title}</h3>
-                  <p className="text-text-secondary text-sm mb-5 leading-relaxed">{t.desc}</p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {t.examples.map((ex) => (
-                      <span key={ex} className="badge-warm text-xs">
-                        {ex}
+                {/* Tech Pills Footer & Flow Connector */}
+                <div className="pt-4 border-t border-border-subtle flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
+                    {stage.tech.map((t) => (
+                      <span key={t} className="badge-warm text-[10px] sm:text-xs py-0.5 px-2">
+                        {t}
                       </span>
                     ))}
                   </div>
+                  {i < FLOW_STAGES.length - 1 && (
+                    <span className="hidden lg:inline-block text-xs font-display font-bold text-caramel">
+                      Step {i + 1} ➔ {i + 2}
+                    </span>
+                  )}
                 </div>
-                {t.note && (
-                  <p className="text-xs text-text-muted italic pt-4 border-t border-border-subtle">
-                    {t.note}
-                  </p>
-                )}
               </div>
             );
           })}
         </div>
 
-        {/* Practical Toolbox */}
-        <div className="reveal card-warm p-8 sm:p-10 mb-12 bg-surface">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-2xl">🧰</span>
-            <h3 className="font-serif font-bold text-coffee-950 text-xl sm:text-2xl">
-              Algorithms in Your Toolbox
-            </h3>
-          </div>
-          <p className="text-text-secondary text-sm mb-8">
-            These models are thoroughly covered during the workshop and ready to deploy in the hackathon.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {Object.entries(ML_TOOLBOX).map(([category, algos]) => (
-              <div key={category} className="p-5 rounded-2xl bg-surface-soft border border-border-subtle">
-                <h4 className="font-display font-bold text-coffee-900 text-xs tracking-wider uppercase mb-4">
-                  {category}
-                </h4>
-                <div className="space-y-2">
-                  {algos.map((algo) => (
-                    <div
-                      key={algo}
-                      className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-surface border border-border-subtle text-coffee-950 text-xs sm:text-sm font-medium shadow-soft"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-caramel" />
-                      <span>{algo}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Evaluation Metrics */}
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <div className="reveal card-warm p-7">
-            <h4 className="font-serif font-bold text-coffee-950 text-lg mb-2">
-              Regression Metrics
-            </h4>
-            <p className="text-text-muted text-xs mb-4">For continuous value predictions:</p>
-            <div className="flex flex-wrap gap-2">
-              {REGRESSION_METRICS.map((m) => (
-                <span key={m} className="badge-warm text-xs sm:text-sm font-semibold">
-                  {m}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="reveal reveal-delay-1 card-warm p-7">
-            <h4 className="font-serif font-bold text-coffee-950 text-lg mb-2">
-              Classification Metrics
-            </h4>
-            <p className="text-text-muted text-xs mb-4">For category classification predictions:</p>
-            <div className="flex flex-wrap gap-2">
-              {CLASSIFICATION_METRICS.map((m) => (
-                <span key={m} className="badge-caramel text-xs sm:text-sm font-semibold">
-                  {m}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Pro Tip Callout */}
+        {/* Compact Workflow Callout */}
         <div className="reveal p-5 sm:p-6 rounded-2xl bg-amber-soft border border-amber-warm/30 flex items-start gap-4">
-          <span className="text-2xl mt-0.5">💡</span>
+          <span className="text-2xl mt-0.5 flex-shrink-0">💡</span>
           <div>
             <p className="font-serif font-bold text-coffee-950 text-base mb-1">
-              Core Evaluation Philosophy
+              End-to-End Problem Solving Architecture
             </p>
             <p className="text-coffee-900 text-xs sm:text-sm leading-relaxed">
-              Higher accuracy alone does not make a solution winning. The most robust model balances business impact, metric justification, and honest handling of edge cases.
+              Every topic in Day 1 builds directly into the next. During the Day 2 Hackathon, teams apply this exact 6-stage flow to transform their assigned challenge dataset into an evaluated, defendable solution.
             </p>
           </div>
         </div>
