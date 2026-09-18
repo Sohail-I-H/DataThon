@@ -1,8 +1,15 @@
-# React + Vite
+# DataThon 2026 — From Data to Impact
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/84921889-edb5-47c1-8773-e8575a035ae7/deploy-status)](https://app.netlify.com/projects/data-dt/deploys)
 
-Currently, two official plugins are available:
+A modern, responsive web application for **DataThon 2026**, organized by the Department of Artificial Intelligence & Machine Learning. Featuring a 1-day practical Data Science workshop and a 1-day hands-on hackathon.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- **Modern Design & UI**: Clean, warm aesthetic built with Tailwind CSS.
+- **Interactive Sections**: Workshop overview, Hackathon tracks, problem domains, judging rubrics, eligibility, and FAQ/contact info.
+- **Live Registration**: Direct integration with Google Forms for team registrations.
+
+## Tech Stack
+- **React 18** + **Vite**
+- **Tailwind CSS** + PostCSS
+- Deployed on **Netlify**
