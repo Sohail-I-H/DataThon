@@ -1,5 +1,5 @@
 // DataThon 2026 — Single source of truth for all copy
-export const GOOGLE_FORM_LINK = "https://forms.google.com";
+export const GOOGLE_FORM_LINK = "https://forms.gle/Eg5h2ZpY3MFZvj918";
 
 export const EVENT = {
   name: "DataThon",
