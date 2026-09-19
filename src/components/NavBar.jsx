@@ -10,7 +10,6 @@ export default function NavBar() {
     { id: "about", label: "About" },
     { id: "hackathon", label: "Hackathon" },
     { id: "problems", label: "Problems" },
-    { id: "eligibility", label: "Eligibility" },
     { id: "register", label: "Register", cta: true },
     { id: "contact", label: "Contact" },
   ];

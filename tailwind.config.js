@@ -3,8 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
-      colors: {
+      backgroundColor: {
         base: "#FDFBF7",
+      },
+      colors: {
+        canvas: "#FDFBF7",
         "base-warm": "#F5F0E6",
         surface: "#FFFFFF",
         "surface-soft": "#F8F4EC",

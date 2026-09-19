@@ -2,7 +2,7 @@ import NavBar from "./components/NavBar";
 import Hero from "./sections/Hero";
 import { About } from "./sections/About";
 import { Hackathon, ProblemDomains } from "./sections/Hackathon";
-import { Eligibility, Register, Contact, Footer } from "./sections/Register";
+import { Register, Contact, Footer } from "./sections/Register";
 import { useScrollReveal } from "./hooks/useAnimations";
 
 export default function App() {
@@ -24,7 +24,6 @@ export default function App() {
         <About />
         <Hackathon />
         <ProblemDomains />
-        <Eligibility />
         <Register />
         <Contact />
       </main>
