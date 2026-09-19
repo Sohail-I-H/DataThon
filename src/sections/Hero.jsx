@@ -1,5 +1,5 @@
 import { EVENT, GOOGLE_FORM_LINK, HIGHLIGHTS } from "../data/content";
-import { AlertBanner, StatCard } from "../components/UI";
+import { StatCard } from "../components/UI";
 
 export default function Hero() {
   return (
@@ -57,7 +57,6 @@ export default function Hero() {
               className="btn-primary text-base px-9 py-4 rounded-full shadow-md"
             >
               <span>Register Team</span>
-              <span className="text-caramel-light font-normal text-sm">· 15 Slots Only</span>
             </a>
           </div>
         </div>
@@ -66,20 +65,11 @@ export default function Hero() {
       {/* Hero Highlights */}
       <section id="highlights" className="relative z-10 py-16 px-6 bg-surface-soft/60" aria-label="Event highlights">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {HIGHLIGHTS.map((h) => (
               <StatCard key={h.label} {...h} />
             ))}
           </div>
-
-          <AlertBanner
-            items={[
-              "⚡ ONLY 15 TEAMS ACCEPTED",
-              "👥 3 MEMBERS PER TEAM",
-              "🎓 NON-IT: ALL YEARS | IT: 3RD YEAR ONLY",
-              "⏱ FIRST-COME, FIRST-SERVED",
-            ]}
-          />
         </div>
       </section>
     </>

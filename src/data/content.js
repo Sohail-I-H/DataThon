@@ -15,8 +15,8 @@ export const HIGHLIGHTS = [
   { icon: "📅", value: "25–26 Sept 2026", label: "Event Dates" },
   { icon: "📖", value: "1-Day Workshop", label: "Practical DS Foundations" },
   { icon: "💻", value: "1-Day Hackathon", label: "Live Hands-on Challenge" },
-  { icon: "👥", value: "3 Members / Team", label: "Fixed Team Size" },
-  { icon: "⚡", value: "Only 15 Teams", label: "First Come, First Served", urgent: true },
+  { icon: "👥", value: "3 Members / Team", label: "Team Size" },
+  { icon: "🎓", value: "All Branches", label: "IT & Non-IT Welcome" },
 ];
 
 export const DAYS = [
@@ -290,20 +290,11 @@ export const ELIGIBILITY_RULES = {
   },
   it: {
     title: "IT Branches",
-    subtitle: "Strictly 3rd Year Only",
+    subtitle: "All Years Eligible",
     branches: "CSE, ISE, AIML, AIDS, Information Technology, etc.",
-    years: ["3rd Year Students ONLY"],
-    status: "1st, 2nd, and 4th years are NOT eligible",
+    years: ["1st Year", "2nd Year", "3rd Year", "4th / Final Year"],
+    status: "All academic batches eligible",
     isEligible: true,
-  },
-  ineligible: {
-    title: "Not Eligible",
-    items: [
-      "1st-Year Students from IT branches",
-      "2nd-Year Students from IT branches",
-      "4th / Final-Year Students from IT branches",
-      "Solo participants or teams with less/more than 3 members",
-    ],
   },
 };
 
@@ -314,9 +305,7 @@ export const CONTACTS = [
 ];
 
 export const TEAM_REQUIREMENTS = [
-  { icon: "👥", title: "3 Members / Team", desc: "Fixed team size of exactly three students" },
-  { icon: "🎓", title: "Eligibility Checked", desc: "Non-IT (All years) or IT (3rd year only)" },
-  { icon: "⚡", title: "15 Teams Only", desc: "Strict limit to ensure personalized mentoring", urgent: true },
-  { icon: "⏱️", title: "First-Come Basis", desc: "First 15 complete teams receive confirmed slots" },
-  { icon: "🔒", title: "Closes at 15", desc: "Form automatically closes once slots are filled", danger: true },
+  { icon: "👥", title: "3 Members / Team", desc: "Team size of three students" },
+  { icon: "🎓", title: "All Branches Eligible", desc: "Open to both IT & Non-IT branches" },
+  { icon: "📚", title: "All Years Welcome", desc: "Open to 1st, 2nd, 3rd & 4th year students" },
 ];
